@@ -1,131 +1,195 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const SkincareDecoder = () => {
+function App() {
   const [inputText, setInputText] = useState('');
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [ocrLoading, setOcrLoading] = useState(false);
 
-  // Handle Text Analysis
-  const handleAnalyze = async (textToAnalyze) => {
+  // --- Handlers ---
+
+  const handleAnalyze = async () => {
+    if (!inputText) return;
     setLoading(true);
+    setResults(null);
     try {
       const response = await axios.post('http://localhost:5000/api/analyze-text', {
-        ingredientsList: textToAnalyze || inputText
+        ingredientsList: inputText
       });
       setResults(response.data);
     } catch (error) {
-      console.error("Error analyzing", error);
+      alert("Error analyzing text. Is backend running?");
     }
     setLoading(false);
   };
 
-  // Handle Image Upload (OCR)
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    setLoading(true);
+    setOcrLoading(true);
     const formData = new FormData();
     formData.append('image', file);
 
     try {
-      // 1. Get Text from Image
       const response = await axios.post('http://localhost:5000/api/analyze-image', formData);
-      const extractedText = response.data.extractedText;
-      
-      // 2. Set text to input box (allowing user to edit OCR errors)
-      setInputText(extractedText);
-      
-      // 3. Optional: Auto-analyze
-      handleAnalyze(extractedText);
+      setInputText(response.data.extractedText);
     } catch (error) {
-      alert("Could not read image");
+      alert("OCR failed. Try a clearer image.");
     }
-    setLoading(false);
+    setOcrLoading(false);
+  };
+
+  // --- Render Helpers ---
+
+  const getRatingColor = (rating) => {
+    switch (rating) {
+      case 'Best': return 'bg-purple-600 text-white';
+      case 'Good': return 'bg-green-500 text-white';
+      case 'Average': return 'bg-yellow-400 text-black';
+      case 'Icky': return 'bg-orange-500 text-white';
+      case 'Worst': return 'bg-red-600 text-white';
+      default: return 'bg-gray-200 text-gray-700';
+    }
+  };
+
+  const getEuStatus = (item) => {
+    if (!item.data || item.data.eu_status === 'Safe') return null;
+    
+    return (
+      <div className="group relative inline-block ml-2">
+        <span className="cursor-pointer text-xl">
+           {item.data.eu_status === 'Banned' ? '⛔' : '⚠️'}
+        </span>
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-48 bg-gray-900 text-white text-xs rounded p-2 hidden group-hover:block z-50 shadow-lg">
+          <p className="font-bold text-yellow-400 uppercase">{item.data.eu_status}</p>
+          <p>{item.data.eu_details}</p>
+        </div>
+      </div>
+    );
   };
 
   return (
-    <div className="p-10 max-w-4xl mx-auto font-sans">
-      <h1 className="text-3xl font-bold mb-6 text-purple-700">Skincare Decoder</h1>
-      
-      {/* Inputs Area */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div className="min-h-screen bg-gray-50 p-6 font-sans">
+      <div className="max-w-5xl mx-auto">
         
-        {/* Text Input */}
-        <div>
-          <label className="block font-bold mb-2">Paste Ingredients List:</label>
-          <textarea
-            className="w-full border p-2 rounded h-32"
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder="Water, Glycerin, Niacinamide..."
-          />
-          <button 
-            onClick={() => handleAnalyze(null)}
-            className="bg-purple-600 text-white px-4 py-2 mt-2 rounded hover:bg-purple-700"
-          >
-            {loading ? 'Processing...' : 'Analyze Ingredients'}
-          </button>
+        {/* Header */}
+        <header className="mb-8 text-center">
+          <h1 className="text-4xl font-extrabold text-purple-700 mb-2">Skincare Decoder</h1>
+          <p className="text-gray-600">Analyze products for safety, acne triggers, and EU compliance.</p>
+        </header>
+
+        {/* Input Section */}
+        <div className="bg-white p-6 rounded-xl shadow-md grid md:grid-cols-2 gap-8 mb-8">
+          
+          {/* Text Input */}
+          <div className="flex flex-col">
+            <label className="font-semibold mb-2 text-gray-700">Paste Ingredients (comma separated)</label>
+            <textarea
+              className="w-full border border-gray-300 p-3 rounded-lg h-40 focus:ring-2 focus:ring-purple-500 outline-none"
+              placeholder="Water, Niacinamide, Alcohol..."
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+            />
+            <button 
+              onClick={handleAnalyze}
+              disabled={loading}
+              className="mt-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all disabled:opacity-50"
+            >
+              {loading ? 'Decoding...' : 'Analyze Now'}
+            </button>
+          </div>
+
+          {/* OCR Input */}
+          <div className="flex flex-col justify-center items-center border-2 border-dashed border-gray-300 rounded-lg p-6 bg-gray-50">
+            <h3 className="font-semibold text-gray-700 mb-4">Or scan a product label</h3>
+            <input 
+              type="file" 
+              accept="image/*" 
+              onChange={handleImageUpload} 
+              className="hidden" 
+              id="fileUpload"
+            />
+            <label htmlFor="fileUpload" className="cursor-pointer bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded shadow-sm hover:bg-gray-100">
+              Choose Image
+            </label>
+            {ocrLoading && <p className="mt-4 text-purple-600 animate-pulse">Scanning text...</p>}
+            <p className="text-xs text-gray-400 mt-2 text-center">Supported: JPG, PNG. Ensure good lighting.</p>
+          </div>
         </div>
 
-        {/* OCR Input */}
-        <div className="border-l pl-6">
-          <label className="block font-bold mb-2">Or Upload Photo of Label:</label>
-          <input 
-            type="file" 
-            accept="image/*" 
-            onChange={handleImageUpload} 
-            className="mb-4"
-          />
-          <p className="text-sm text-gray-500">
-            Tip: Ensure the photo is clear and contains only the ingredient list.
-          </p>
-        </div>
-      </div>
+        {/* Results Section */}
+        {results && (
+          <div className="bg-white rounded-xl shadow-md overflow-hidden">
+            <table className="w-full text-left border-collapse">
+              <thead className="bg-gray-100 border-b">
+                <tr>
+                  <th className="p-4 text-sm font-bold text-gray-600 uppercase">Ingredient</th>
+                  <th className="p-4 text-sm font-bold text-gray-600 uppercase">Rating</th>
+                  <th className="p-4 text-sm font-bold text-gray-600 uppercase text-center">Acne</th>
+                  <th className="p-4 text-sm font-bold text-gray-600 uppercase text-center">Irritant</th>
+                  <th className="p-4 text-sm font-bold text-gray-600 uppercase">Function & Safety</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {results.map((item, idx) => (
+                  <tr key={idx} className={`hover:bg-gray-50 ${!item.found ? 'bg-red-50' : ''}`}>
+                    
+                    {/* Name */}
+                    <td className="p-4 font-medium text-gray-800">
+                      {item.data ? item.data.inci_name : item.searched}
+                      {!item.found && <span className="block text-xs text-red-500 mt-1">Unknown Ingredient</span>}
+                    </td>
 
-      {/* Results Table */}
-      {results && (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="py-2 px-4 border-b text-left">Ingredient</th>
-                <th className="py-2 px-4 border-b text-left">Rating</th>
-                <th className="py-2 px-4 border-b text-left">Irritancy</th>
-                <th className="py-2 px-4 border-b text-left">Comedogenic</th>
-                <th className="py-2 px-4 border-b text-left">Function</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.map((item, index) => (
-                <tr key={index} className={!item.found ? "bg-red-50" : ""}>
-                  <td className="py-2 px-4 border-b font-medium">
-                    {item.data ? item.data.inci_name : item.searched}
-                    {!item.found && <span className="text-xs text-red-500 block">(Not in DB)</span>}
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                     {item.data?.rating && (
-                        <span className={`px-2 py-1 rounded text-xs text-white
-                          ${item.data.rating === 'Best' ? 'bg-green-600' : 
-                            item.data.rating === 'Worst' ? 'bg-red-600' : 'bg-gray-400'}`}>
+                    {/* Rating */}
+                    <td className="p-4">
+                      {item.data && (
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${getRatingColor(item.data.rating)}`}>
                           {item.data.rating}
                         </span>
-                     )}
-                  </td>
-                  <td className="py-2 px-4 border-b">{item.data?.irritability}</td>
-                  <td className="py-2 px-4 border-b">{item.data?.comedogenic}</td>
-                  <td className="py-2 px-4 border-b text-sm">
-                    {item.data?.functions?.join(", ")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+                      )}
+                    </td>
+
+                    {/* Comedogenic (Acne) */}
+                    <td className="p-4 text-center">
+                      {item.data && (
+                        <span className={`font-bold ${item.data.comedogenic > 2 ? 'text-red-500' : 'text-gray-400'}`}>
+                          {item.data.comedogenic}
+                        </span>
+                      )}
+                    </td>
+
+                    {/* Irritancy */}
+                    <td className="p-4 text-center">
+                      {item.data && (
+                        <span className={`font-bold ${item.data.irritability > 2 ? 'text-red-500' : 'text-gray-400'}`}>
+                          {item.data.irritability}
+                        </span>
+                      )}
+                    </td>
+
+                    {/* Function & EU Status */}
+                    <td className="p-4 text-sm text-gray-600">
+                      {item.data ? (
+                        <div className="flex items-center justify-between">
+                          <span>{item.data.functions?.join(', ')}</span>
+                          {getEuStatus(item)}
+                        </div>
+                      ) : (
+                        "-"
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        
+      </div>
     </div>
   );
-};
+}
 
-export default SkincareDecoder;
+export default App;
