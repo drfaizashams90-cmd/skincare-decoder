@@ -212,7 +212,11 @@ export default function Home() {
             </h1>
           </div>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Analyze cosmetic product labels for safety, acne triggers, and EU regulatory compliance
+            Analyze cosmetic product labels for safety, acne triggers, and EU regulatory compliance.
+            <br className="hidden md:block" />
+            <span className="mt-3 inline-block px-4 py-1.5 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-full text-sm font-semibold border border-indigo-200 dark:border-indigo-800 shadow-sm">
+              🧪 Checking against a live database of {ingredientsData.length} ingredients
+            </span>
           </p>
         </div>
 
@@ -408,5 +412,6 @@ export default function Home() {
     </main>
   );
 }
+
 
 
