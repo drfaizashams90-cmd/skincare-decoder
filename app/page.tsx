@@ -142,7 +142,7 @@ export default function Home() {
       // Preprocess image
       const processedImage = await preprocessImage(file);
 
-      const { data: { text }, progress } = await recognize(processedImage, 'eng', {
+      const { data: { text } } = await recognize(processedImage, 'eng', {
         logger: (m) => {
           if (m.status === 'recognizing text') {
             setOcrProgress(Math.round(m.progress * 100));
@@ -408,4 +408,5 @@ export default function Home() {
     </main>
   );
 }
+
 
