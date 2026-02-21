@@ -1,8 +1,11 @@
 'use client';
 import { useState } from 'react';
 import { Upload, FileText, Sparkles, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
+
 import { ingredientsData, Ingredient } from '@/data/ingredientsData';
 import { recognize } from 'tesseract.js';
+
+<Image src="https://github.com/Vidhyambika/skincare-decoder/blob/main/public/SKINCARE%20DECODER%20LOGO%20FINAL%20UPLOADED.jpg" alt="Logo" width={48} height={48} />
 
 interface AnalysisResult {
   ingredient: Ingredient;
@@ -412,6 +415,7 @@ export default function Home() {
     </main>
   );
 }
+
 
 
 
