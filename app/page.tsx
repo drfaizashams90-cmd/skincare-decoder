@@ -5,7 +5,6 @@ import { Upload, FileText, Sparkles, AlertCircle, CheckCircle, XCircle } from 'l
 import { ingredientsData, Ingredient } from '@/data/ingredientsData';
 import { recognize } from 'tesseract.js';
 
-<Image src="/logo.jpg" alt="Logo" width={48} height={48} />
 
 interface AnalysisResult {
   ingredient: Ingredient;
@@ -415,6 +414,7 @@ export default function Home() {
     </main>
   );
 }
+
 
 
 
