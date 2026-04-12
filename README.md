@@ -45,7 +45,7 @@ npm run dev
 npm run build
 ```
 
-## Screenshots:
+## Screenshots
 
 ![Blue Purple Futuristic Modern 3D Tech Company Business Presentation (1)](https://github.com/user-attachments/assets/cca12c2c-2e49-41e3-bd1f-ea2bb211b036)
 
