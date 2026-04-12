@@ -2,6 +2,9 @@
 
 A Next.js 14 web application that analyzes cosmetic product labels for safety, acne triggers, and EU regulatory compliance.
 
+https://github.com/user-attachments/assets/e0a81443-4f33-4692-a7f6-b2767c200349
+
+
 ## Features
 
 - **Text Input**: Paste comma-separated ingredient lists
@@ -42,6 +45,16 @@ npm run dev
 npm run build
 ```
 
+## Screenshots:
 
+![Blue Purple Futuristic Modern 3D Tech Company Business Presentation (1)](https://github.com/user-attachments/assets/cca12c2c-2e49-41e3-bd1f-ea2bb211b036)
+
+![Blue Purple Futuristic Modern 3D Tech Company Business Presentation (2)](https://github.com/user-attachments/assets/3f17e287-085b-4f3d-bfcd-85cd5ed07bf0)
+
+![Blue Purple Futuristic Modern 3D Tech Company Business Presentation](https://github.com/user-attachments/assets/72cc09a5-3c95-4ab4-99b0-a320a23e8ca1)
+
+![Screenshot 2026-02-20 170504](https://github.com/user-attachments/assets/e9881761-d3a9-4398-9512-e048a1319233)
+
+![Screenshot 2026-02-20 170559](https://github.com/user-attachments/assets/70d6e0c2-3334-47a6-ac6f-33c561471106)
 
 
