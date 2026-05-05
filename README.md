@@ -59,6 +59,10 @@ ________________________________________
    •	Identifies restricted and banned substances
 🧠 **Open Source**
 ________________________________________
+## System Architecture
+
+![Architecture](https://github.com/Vidhyambika/skincare-decoder/blob/main/Skincare%20Ingredient%20Decoder%20Architecture%20Diagram.png)
+________________________________________
 ## Components:
 - **Text Input**: Paste comma-separated ingredient lists
 - **OCR/Camera**: Upload product label images for automatic text extraction
