@@ -2,9 +2,11 @@
 
 #### AI Tool for Real-Time Cosmetic Ingredients Safety Analysis using OCR & EU Regulations
 
-**Live Demo:** https://skincare-decoder.vercel.app/
-
 **Dataset:** 800+ cosmetic ingredients mapped to EU safety standards
+
+## 🎥 Quick Demo
+
+**Live Demo:** https://skincare-decoder.vercel.app/
 
 **Demo Video:** https://github.com/user-attachments/assets/e0a81443-4f33-4692-a7f6-b2767c200349
 ________________________________________
