@@ -203,20 +203,20 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <main className="min-h-screen bg-gradient-to-br from-brand-800 via-brand-900 to-black">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Sparkles className="w-10 h-10 text-indigo-600" />
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
-              Skincare Ingredient Decoder
+            <Sparkles className="w-10 h-10 text-brand-600" />
+            <h1 className="text-4xl md:text-5xl font-heading font-bold text-white">
+              Skincare Ingredient Checker Pakistan
             </h1>
           </div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Analyze cosmetic product labels for safety, acne triggers, and EU regulatory compliance.
+          <p className="text-lg text-brand-100 max-w-2xl mx-auto font-body">
+            Paste or scan any product's ingredient list to instantly check for irritants, acne triggers, and restricted substances — built for Pakistani skin by SkinVerse.pk.
             <br className="hidden md:block" />
-            <span className="mt-3 inline-block px-4 py-1.5 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-full text-sm font-semibold border border-indigo-200 dark:border-indigo-800 shadow-sm">
+            <span className="mt-3 inline-block px-4 py-1.5 bg-brand-800 text-brand-100 rounded-full text-sm font-semibold border border-brand-600 shadow-sm">
               🧪 Checking against a live database of {ingredientsData.length} ingredients
             </span>
           </p>
@@ -243,10 +243,10 @@ export default function Home() {
                   htmlFor="image-upload"
                   className={`flex items-center justify-center gap-3 px-6 py-4 border-2 border-dashed rounded-lg cursor-pointer transition-all ${isProcessingOCR
                     ? 'border-gray-300 bg-gray-50 cursor-not-allowed'
-                    : 'border-indigo-300 hover:border-indigo-500 hover:bg-indigo-50'
+                    : 'border-brand-300 hover:border-brand-500 hover:bg-brand-50'
                     } dark:border-gray-600 dark:hover:border-gray-500`}
                 >
-                  <Upload className="w-5 h-5 text-indigo-600" />
+                  <Upload className="w-5 h-5 text-brand-600" />
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     {isProcessingOCR ? `Processing... ${ocrProgress}%` : 'Choose Image or Take Photo'}
                   </span>
@@ -254,7 +254,7 @@ export default function Home() {
                 {isProcessingOCR && (
                   <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
                     <div
-                      className="bg-indigo-600 h-2 rounded-full transition-all duration-300"
+                      className="bg-brand-600 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${ocrProgress}%` }}
                     />
                   </div>
@@ -271,7 +271,7 @@ export default function Home() {
                 value={ingredientText}
                 onChange={(e) => setIngredientText(e.target.value)}
                 placeholder="e.g., Water, Niacinamide, Hyaluronic Acid, Salicylic Acid, Fragrance..."
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white resize-none"
                 rows={6}
               />
             </div>
@@ -280,7 +280,7 @@ export default function Home() {
             <button
               onClick={analyzeIngredients}
               disabled={!ingredientText.trim()}
-              className="w-full md:w-auto px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+              className="w-full md:w-auto px-8 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             >
               <FileText className="w-5 h-5" />
               Analyze Ingredients
@@ -291,14 +291,14 @@ export default function Home() {
         {/* Results Section */}
         {analysisResults.length > 0 && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-2xl font-heading font-bold text-white mb-4">
               Analysis Results ({analysisResults.length} ingredients found)
             </h2>
 
             {analysisResults.map((result, index) => (
               <div
                 key={index}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border-l-4 border-indigo-500"
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border-l-4 border-brand-500"
               >
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                   <div>
@@ -374,7 +374,7 @@ export default function Home() {
                   {result.ingredient.functions.map((func, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded-full text-sm font-medium"
+                      className="px-3 py-1 bg-brand-100 dark:bg-brand-900 text-brand-700 dark:text-brand-300 rounded-full text-sm font-medium"
                     >
                       {func}
                     </span>
