@@ -4681,6 +4681,18 @@ export const ingredientsData: Ingredient[] = [
     description: 'Fatty acid used to harden soaps or emulsify lotions.',
   },
   {
+  id: 'emollient-025A',
+  inci_name: 'Lauric Acid',
+  aliases: ['Dodecanoic Acid', 'C12 Fatty Acid', 'Lauric Acid'],
+  rating: 'Good',
+  irritability: 2,
+  comedogenic: 4,
+  functions: ['Cleansing', 'Surfactant', 'Emollient', 'Emulsifying', 'Antimicrobial'],
+  eu_status: 'Safe',
+  eu_details: null,
+  description: 'A saturated medium-chain fatty acid derived primarily from coconut and palm kernel oil. Used as a cleansing agent, surfactant, and emulsifier with antimicrobial properties, but may be comedogenic for acne-prone skin.',
+},
+  {
     id: 'emollient-028',
     inci_name: 'Oleic Acid',
     aliases: [],
