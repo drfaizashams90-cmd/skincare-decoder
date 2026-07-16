@@ -271,7 +271,7 @@ export default function Home() {
                 value={ingredientText}
                 onChange={(e) => setIngredientText(e.target.value)}
                 placeholder="e.g., Water, Niacinamide, Hyaluronic Acid, Salicylic Acid, Fragrance..."
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-black resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white resize-none"
                 rows={6}
               />
             </div>
