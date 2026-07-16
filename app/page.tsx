@@ -208,8 +208,7 @@ export default function Home() {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Sparkles className="w-10 h-10 text-brand-600" />
-            <h1 className="text-4xl md:text-5xl font-heading font-bold text-black">
+            <h1 className="text-4xl md:text-5xl font-heading font-bold text-white">
               Skincare Ingredient Checker Pakistan
             </h1>
           </div>
