@@ -25,6 +25,18 @@ export const ingredientsData: Ingredient[] = [
     description: 'Versatile ingredient that improves skin barrier, reduces inflammation, and brightens skin tone.',
   },
   {
+  id: 'skin-brightening',
+  inci_name: '4-Butylresorcinol',
+  aliases: ['4-Butylresorcinol', 'Rucinol', '4-n-Butylresorcinol'],
+  rating: 'Best',
+  irritability: 1,
+  comedogenic: 0,
+  functions: ['Brightening', 'Anti-pigmentation', 'Tyrosinase inhibitor', 'Antioxidant'],
+  eu_status: 'Safe',
+  eu_details: null,
+  description: 'A highly effective skin-brightening active that inhibits tyrosinase, helping reduce melasma, post-inflammatory hyperpigmentation, and dark spots. It is considered one of the most potent cosmetic depigmenting ingredients with low irritation potential.',
+},
+  {
     id: '2',
     inci_name: 'Hyaluronic Acid',
     aliases: ['Sodium Hyaluronate', 'HA'],
