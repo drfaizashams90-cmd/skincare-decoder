@@ -61,6 +61,18 @@ export const ingredientsData: Ingredient[] = [
     description: 'Effective exfoliant for acne-prone skin, can be drying.',
   },
   {
+  id: 'skin-brightening',
+  inci_name: 'Kojic Acid Dipalmitate',
+  aliases: ['Kojic Dipalmitate', 'KAD', 'Kojic Acid Dipalmitate'],
+  rating: 'Best',
+  irritability: 0,
+  comedogenic: 1,
+  functions: ['Brightening', 'Anti-pigmentation', 'Tyrosinase inhibitor', 'Antioxidant'],
+  eu_status: 'Safe',
+  eu_details: null,
+  description: 'A stable, oil-soluble derivative of kojic acid that inhibits tyrosinase to reduce melasma, hyperpigmentation, and dark spots. It is less irritating and more stable than kojic acid, making it suitable for long-term brightening formulations.',
+},
+  {
     id: '4',
     inci_name: 'Retinol',
     aliases: ['Vitamin A', 'Retinyl Palmitate', 'Retinyl Alcohol'],
