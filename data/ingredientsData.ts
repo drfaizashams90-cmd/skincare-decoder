@@ -6651,7 +6651,7 @@ export const ingredientsData: Ingredient[] = [
   {
     id: 'active-005',
     inci_name: 'Kojic Acid',
-    aliases: ['5-Hydroxy-2-(hydroxymethyl)-4-pyrone'],
+    aliases: ['5-Hydroxy-2-(hydroxymethyl)-4-pyrone', 'Kojic Acid'],
     rating: 'Good',
     irritability: 2,
     comedogenic: 0,
