@@ -9700,16 +9700,6 @@ export const ingredientsData: Ingredient[] = [
     eu_details: 'Carcinogenic.',
     description: 'Byproduct of coal processing. Banned in EU cosmetics due to cancer-causing PAHs.'
   },
-  import { Ingredient } from './ingredientsData';
-
-// Supplementary ingredient database — ingredients NOT present in the existing
-// 803-entry ingredientsData.ts file. Same interface, same rating conventions.
-// Organized by category. All IDs prefixed "add-" to guarantee no collision
-// with existing IDs.
-
-export const newIngredientsData: Ingredient[] = [
-
-  // ===== A. ADVANCED BRIGHTENING / PIGMENTATION ACTIVES =====
   { id: 'add-active-001', inci_name: 'Hydroxyethyl Piperazinyl Aminomethyl Bisphenol', aliases: ['Thiamidol'], rating: 'Best', irritability: 0, comedogenic: 0, functions: ['Brightening', 'Tyrosinase Inhibitor'], eu_status: 'Safe', eu_details: null, description: 'Patented high-affinity tyrosinase inhibitor, one of the most clinically validated brightening actives, effective at low concentrations (0.2%).' },
   { id: 'add-active-002', inci_name: 'Undecylenoyl Phenylalanine', aliases: ['Sepiwhite'], rating: 'Best', irritability: 0, comedogenic: 0, functions: ['Brightening', 'Tyrosinase Inhibitor'], eu_status: 'Safe', eu_details: null, description: 'Amino acid derivative that inhibits melanocyte-stimulating hormone binding, reducing melanin production.' },
   { id: 'add-active-003', inci_name: 'Phenylethyl Resorcinol', aliases: ['Symwhite 377'], rating: 'Best', irritability: 1, comedogenic: 0, functions: ['Brightening', 'Antioxidant'], eu_status: 'Safe', eu_details: null, description: 'Potent synthetic resorcinol derivative, several times stronger than arbutin at inhibiting tyrosinase.' },
